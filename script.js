@@ -3,9 +3,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const addTaskBtn = document.getElementById('addTaskBtn');
     const taskList = document.getElementById('taskList');
     const progress = document.getElementById('progress');
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
 
     // Load tasks from local storage
     const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+    // Load theme from local storage
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.body.classList.toggle('dark', savedTheme === 'dark');
 
     // Render tasks
     function renderTasks() {
@@ -66,6 +71,13 @@ document.addEventListener('DOMContentLoaded', function() {
             renderTasks();
             taskInput.value = '';
         }
+    });
+
+    // Toggle theme
+    themeToggleBtn.addEventListener('click', () => {
+        document.body.classList.toggle('dark');
+        const currentTheme = document.body.classList.contains('dark') ? 'dark' : 'light';
+        localStorage.setItem('theme', currentTheme);
     });
 
     // Initial render
