@@ -16,7 +16,20 @@ document.addEventListener('DOMContentLoaded', function() {
             if (task.completed) {
                 li.classList.add('completed');
             }
+
+            // Toggle task completion
             li.addEventListener('click', () => toggleTask(index));
+
+            // Create delete button
+            const deleteBtn = document.createElement('button');
+            deleteBtn.textContent = 'Delete';
+            deleteBtn.classList.add('delete-btn');
+            deleteBtn.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent the toggleTask event from firing
+                deleteTask(index);
+            });
+
+            li.appendChild(deleteBtn);
             taskList.appendChild(li);
         });
         updateProgress();
@@ -25,6 +38,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // Toggle task completion
     function toggleTask(index) {
         tasks[index].completed = !tasks[index].completed;
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+        renderTasks();
+    }
+
+    // Delete task
+    function deleteTask(index) {
+        tasks.splice(index, 1);
         localStorage.setItem('tasks', JSON.stringify(tasks));
         renderTasks();
     }
