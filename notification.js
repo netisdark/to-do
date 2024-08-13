@@ -15,7 +15,7 @@ if ('Notification' in window) {
 }
 
 function showNotification() {
-  document.getElementById('addtaskbtn').addEventListener("click",()=>{
+  document.getElementById('addTaskBtn').addEventListener("click",()=>{
     
   const notification = new Notification('New Notification', {
     body: 'This is a new notification'
