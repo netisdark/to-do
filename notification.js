@@ -16,6 +16,7 @@ if ('Notification' in window) {
 
 // Function to show a notification
 function showNotification() {
+  alert('hello');
   const notification = new Notification('New Notification', {
     body: 'This is a new notification'
   });
